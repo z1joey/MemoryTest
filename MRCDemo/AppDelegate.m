@@ -1,12 +1,14 @@
 //
 //  AppDelegate.m
-//  MemoryTest
+//  MRCDemo
 //
 //  Created by Yi Zhang on 2019/4/17.
 //  Copyright © 2019 Yi Zhang. All rights reserved.
 //
 
 #import "AppDelegate.h"
+#import "Person.h"
+#import "Sweater.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,37 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    Person *ray = [[Person alloc] initWithName:@"Ray"];
+    Person *vicki = [[Person alloc] initWithName:@"Vicki"];
+    
+    Sweater *graySweater = [[Sweater alloc] initWithSweaterType:SweaterTypeGray];
+    Sweater *blueSweater = [[Sweater alloc] initWithSweaterType:SweaterTypeBlue];
+    
+    // at this point, Gray: 1, Blue: 1
+    
+    ray.sweater = graySweater;
+    vicki.sweater = blueSweater;
+    
+    [graySweater release];
+    [blueSweater release];
+    
+    // Gray: 1, Blue: 1
+    
+    vicki.sweater = graySweater;
+    
+    // Gray: 2
+    
+    ray.sweater = nil;
+    
+    // Gray: 1
+    
+    NSString *quote = [ray quote];
+    NSLog(@"Quote: %@", quote);
+    
+    [ray release];
+    [vicki release];
+    
     return YES;
 }
 
